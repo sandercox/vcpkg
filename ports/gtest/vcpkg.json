@@ -2,5 +2,15 @@
   "name": "gtest",
   "version-date": "2021-05-07",
   "description": "GoogleTest and GoogleMock testing frameworks",
-  "homepage": "https://github.com/google/googletest"
+  "homepage": "https://github.com/google/googletest",
+  "features": {
+    "abseil": {
+      "description": "Abseil support for stacktraces",
+      "dependencies": [
+        {
+          "name": "abseil"
+        }
+      ]
+    }
+  }
 }

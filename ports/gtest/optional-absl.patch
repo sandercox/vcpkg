@@ -1,0 +1,21 @@
+diff --git a/googletest/CMakeLists.txt b/googletest/CMakeLists.txt
+index abdd98b7..320b4d95 100644
+--- a/googletest/CMakeLists.txt
++++ b/googletest/CMakeLists.txt
+@@ -143,6 +143,16 @@ if (DEFINED CMAKE_VERSION AND NOT "${CMAKE_VERSION}" VERSION_LESS "2.8.11")
+     "$<BUILD_INTERFACE:${gtest_build_include_dirs}>"
+     "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>")
+ endif()
++
++option(HAS_ABSL "Abseil support available" OFF)
++if (HAS_ABSL)
++  find_package(Abseil REQUIRED)
++  target_compile_definitions(gtest PRIVATE GTEST_HAS_ABSL=1)
++  target_link_libraries(gtest PRIVATE absl::strings)
++  target_link_libraries(gtest PRIVATE absl::stacktrace)
++  target_link_libraries(gtest PRIVATE absl::failure_signal_handler)
++endif()
++
+ target_link_libraries(gtest_main PUBLIC gtest)
+ 
+ ########################################################################
