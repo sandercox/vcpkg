@@ -1,0 +1,18 @@
+diff --git a/src/win32_init.c b/src/win32_init.c
+index 885f32fa..110d5304 100644
+--- a/src/win32_init.c
++++ b/src/win32_init.c
+@@ -688,13 +688,6 @@ int _glfwPlatformInit(void)
+     createKeyTables();
+     _glfwUpdateKeyNamesWin32();
+ 
+-    if (_glfwIsWindows10Version1703OrGreaterWin32())
+-        SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+-    else if (IsWindows8Point1OrGreater())
+-        SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
+-    else if (IsWindowsVistaOrGreater())
+-        SetProcessDPIAware();
+-
+     if (!createHelperWindow())
+         return GLFW_FALSE;
+ 
