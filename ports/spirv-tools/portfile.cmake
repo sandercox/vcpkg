@@ -32,11 +32,15 @@ vcpkg_cmake_configure(
 )
 
 vcpkg_cmake_install()
+file(INSTALL "${SOURCE_PATH}/include/spirv-tools/linter.hpp"
+    DESTINATION "${CURRENT_PACKAGES_DIR}/include/spirv-tools")
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/SPIRV-Tools PACKAGE_NAME spirv-tools DO_NOT_DELETE_PARENT_CONFIG_PATH)
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/SPIRV-Tools-link PACKAGE_NAME spirv-tools-link DO_NOT_DELETE_PARENT_CONFIG_PATH)
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/SPIRV-Tools-lint PACKAGE_NAME spirv-tools-lint DO_NOT_DELETE_PARENT_CONFIG_PATH)
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/SPIRV-Tools-opt PACKAGE_NAME spirv-tools-opt DO_NOT_DELETE_PARENT_CONFIG_PATH)
 vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/SPIRV-Tools-reduce PACKAGE_NAME spirv-tools-reduce) # now delete
+vcpkg_replace_string("${CURRENT_PACKAGES_DIR}/share/spirv-tools-reduce/SPIRV-Tools-reduceConfig.cmake"
+    "SPIRV-Tools-reduceTargets.cmake" "SPIRV-Tools-reduceTarget.cmake")
 vcpkg_fixup_pkgconfig()
 
 if("tools" IN_LIST FEATURES)
